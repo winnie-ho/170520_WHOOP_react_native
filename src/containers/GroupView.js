@@ -19,8 +19,8 @@ class GroupView extends React.Component {
 
 		this.state = {
 			events: ["Park Run", "Great Edinburgh Run", "Social Night", "Long Saturday Run"],
-			messages: ["Hi", "Anyone for running Sat?", "Me"],
-			members: ["Winnie Ho", "Janine Watson", "Kate Murray", "Dr Kate"]
+			messages: ["▻ Hi", "▻ Anyone for running Sat?", "▻ Me"],
+			members: ["◉ Winnie Ho ◎", "◉ Janine Watson ◎", "◉ Kate Murray ◎", "◉ Dr Kate ◎"]
 		}
 		
 	}
