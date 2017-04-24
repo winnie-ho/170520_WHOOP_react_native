@@ -18,7 +18,7 @@ class Groups extends React.Component {
 		super(props)
 
 		this.state = {
-			groups: ["Group 1", "Group 2", "Group 3"]
+			groups: ["Group 1", "Group 2", "Running", "Cohort 8", "Yoga", "Run4it"]
 		}
 		
 	}
@@ -30,7 +30,7 @@ class Groups extends React.Component {
 						style = {styles.groupButton}
 						onPress = {this.goGroup}
 						key={index}>
-						<Text>{group}</Text>
+						<Text>{group.toUpperCase()}</Text>
 					</TouchableOpacity>
 				)
 		})
@@ -45,7 +45,7 @@ class Groups extends React.Component {
 					{"\n"}
 					</Text>
 
-					<ScrollView style = {styles.scrollView}>
+					<ScrollView>
 						{groupNodes}
 					</ScrollView>
 				</View>
@@ -69,18 +69,15 @@ const styles = StyleSheet.create({
 	},
 	groupButton: {
 		height: 100,
-		width: 100,
+		width: 340,
 		borderRadius: 5,
 		borderColor: 'gray',
 		borderWidth: 1,
 		padding: 5,
 		alignItems: 'center',
 		justifyContent: 'center',
+		margin: 5,
 	},
-	scrollView: {
-		flex: 1,
-		flexDirection: 'row',
-	}
 
 })
 
