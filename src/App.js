@@ -17,8 +17,8 @@ class App extends React.Component {
 		return(
 			<Router>
 				<Scene key = "root" style={{paddingTop: Platform.OS=== "ios" ? 64 : 54}}>
-					<Scene key = "home" component = {Home} title = "Home"/>
-					<Scene key = "groups" component = {Groups} title = "Groups"/>
+					<Scene key = "home" component = {Home} title = " WH◉◎P"/>
+					<Scene key = "groups" component = {Groups} title = "WH◉◎P Groups"/>
 					<Scene key = "groupView" component = {GroupView} title = "Group"/>
 				</Scene>
 			</Router>

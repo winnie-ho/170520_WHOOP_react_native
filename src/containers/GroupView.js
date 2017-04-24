@@ -48,15 +48,16 @@ class GroupView extends React.Component {
 
 		return(
 				<View style = {styles.container}>
-					<Text style = {styles.logo}>
-					WH◉◎P
-					{"\n"}
-					</Text>
-
-					<ScrollView>
-						{eventNodes}
+					<Text style = {styles.h3}>MESSAGES</Text>
+					<ScrollView style = {styles.messageListing}>
 						{messageNodes}
 					</ScrollView>
+
+					<Text style = {styles.h3}>EVENTS</Text>
+					<ScrollView style = {styles.eventListing}>
+						{eventNodes}
+					</ScrollView>
+
 				</View>
 			)
 	}
@@ -75,6 +76,7 @@ const styles = StyleSheet.create({
 	},
 	h3: {
 		fontSize: 15,
+		margin: 5,
 	},
 	groupButton: {
 		height: 100,
@@ -86,6 +88,23 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 		margin: 5,
+	},
+	eventListing:{
+		width: 360,
+		borderRadius: 5,
+		borderColor: 'gray',
+		borderWidth: 1,
+		margin: 5,
+		padding: 5,
+	},
+	messageListing:{
+		width: 360,
+		height: 300,
+		borderRadius: 5,
+		borderColor: 'gray',
+		borderWidth: 1,
+		margin: 5,
+		padding: 5,
 	},
 
 })
