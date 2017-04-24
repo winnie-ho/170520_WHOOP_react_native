@@ -89,10 +89,6 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
-	logo: {
-		fontSize: 20,
-		marginTop: 10,
-	},
 	h3: {
 		fontSize: 15,
 		margin: 5,
