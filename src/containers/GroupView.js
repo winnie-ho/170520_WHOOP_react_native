@@ -19,7 +19,8 @@ class GroupView extends React.Component {
 
 		this.state = {
 			events: ["Park Run", "Great Edinburgh Run", "Social Night", "Long Saturday Run"],
-			messages: ["Hi", "Anyone for running Sat?", "Me"]
+			messages: ["Hi", "Anyone for running Sat?", "Me"],
+			members: ["Winnie Ho", "Janine Watson", "Kate Murray", "Dr Kate"]
 		}
 		
 	}
@@ -48,11 +49,24 @@ class GroupView extends React.Component {
 				)
 		})
 
+		var memberNodes = this.state.members.map((member, index)=>{
+			return(
+					<TouchableOpacity
+						key={index}>
+						<Text>{member}</Text>
+					</TouchableOpacity>
+				)
+		})
+
 
 
 
 		return(
 				<View style = {styles.container}>
+					<Text style = {styles.h3}>GROUPIES</Text>
+					<ScrollView style = {styles.membersListing}>
+						{memberNodes}
+					</ScrollView>
 					<Text style = {styles.h3}>MESSAGES</Text>
 					<ScrollView style = {styles.messageListing}>
 						{messageNodes}
@@ -93,6 +107,11 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 		margin: 5,
+	},
+	membersListing: {
+		height: 20,
+		width: 360,
+		overflow: 'hidden',
 	},
 	eventListing:{
 		width: 360,
