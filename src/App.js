@@ -2,6 +2,7 @@ import React from "react";
 import Home from "./containers/Home";
 import Groups from "./containers/Groups";
 import GroupView from "./containers/GroupView";
+import EventView from "./containers/EventView";
 
 import {
 	Router,
@@ -20,6 +21,7 @@ class App extends React.Component {
 					<Scene key = "home" component = {Home} title = " WH◉◎P"/>
 					<Scene key = "groups" component = {Groups} title = "WH◉◎P Groups"/>
 					<Scene key = "groupView" component = {GroupView} title = "Group"/>
+					<Scene key = "eventView" component = {EventView} title = "Event"/>
 				</Scene>
 			</Router>
 		);

@@ -13,55 +13,27 @@ import {
 } from 'react-native-router-flux';
 
 
-class GroupView extends React.Component {
+class EventView extends React.Component {
 	constructor(props){
 		super(props)
 
 		this.state = {
-			events: ["Park Run", "Great Edinburgh Run", "Social Night", "Long Saturday Run"],
-			messages: ["Hi", "Anyone for running Sat?", "Me"]
 		}
 		
 	}
 
-	goEvent(){
-		Actions.eventView();
-	}
+
 
 	render(){
-		var eventNodes = this.state.events.map((event, index)=>{
-			return(
-					<TouchableOpacity
-						onPress={this.goEvent}
-						key={index}>
-						<Text>{event.toUpperCase()}</Text>
-					</TouchableOpacity>
-				)
-		})
-
-		var messageNodes = this.state.messages.map((message, index)=>{
-			return(
-					<TouchableOpacity
-						key={index}>
-						<Text>{message.toUpperCase()}</Text>
-					</TouchableOpacity>
-				)
-		})
-
-
-
 
 		return(
 				<View style = {styles.container}>
-					<Text style = {styles.h3}>MESSAGES</Text>
-					<ScrollView style = {styles.messageListing}>
-						{messageNodes}
-					</ScrollView>
+					<Text style = {styles.h3}>EVENT</Text>
 
-					<Text style = {styles.h3}>EVENTS</Text>
-					<ScrollView style = {styles.eventListing}>
-						{eventNodes}
-					</ScrollView>
+					<Text>
+						This is some text for the event view page
+					</Text>
+
 
 				</View>
 			)
@@ -114,4 +86,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default GroupView;
+export default EventView;
