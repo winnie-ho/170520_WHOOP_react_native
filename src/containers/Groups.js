@@ -15,12 +15,30 @@ import {
 
 class Groups extends React.Component {
 	constructor(props){
-		super(props)
+		super()
+
+		this.getGroups = this.getGroups.bind(this);
 
 		this.state = {
 			groups: ["Group 1", "Group 2", "Running", "Cohort 8", "Yoga", "Run4it"]
 		}
 		
+	}
+
+	componentDidMount(){
+		this.getGroups();
+	}
+
+
+	getGroups(){
+		console.log("hello there!");
+
+		fetch('https://whooprails.herokuapp.com/users/1.json')  
+	  .then(function(response) {
+	    console.log(response.json());
+	    return response.json()
+
+	  })
 	}
 
 	goGroup(){
@@ -46,7 +64,6 @@ class Groups extends React.Component {
 
 		return(
 				<View style = {styles.container}>
-
 					<ScrollView>
 						{groupNodes}
 					</ScrollView>

@@ -11,6 +11,8 @@ import {
 	Actions,
 } from 'react-native-router-flux';
 
+import SignIn from '../auth/SignIn';
+
 
 class Home extends React.Component {
 	constructor(props){
@@ -18,6 +20,8 @@ class Home extends React.Component {
 
 		
 	}
+
+
 
 	goGroupsPage(){
 		Actions.groups();
@@ -41,6 +45,9 @@ class Home extends React.Component {
 						onPress = {this.goGroupsPage}>
 						<Text>my groups</Text>
 					</TouchableOpacity>
+
+					<SignIn url="https://whooprails.herokuapp.com/users/sign_in.json" onSignIn={this.setUser}>
+					</SignIn>
 				</View>
 			)
 	}
