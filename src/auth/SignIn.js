@@ -24,50 +24,62 @@ class SignIn extends React.Component {
 
   constructor(props){
     super(props)
-    // this.handleOnChangeEmail = this.handleOnChangeEmail.bind(this)
-    // this.handleOnChangePassword = this.handleOnChangePassword.bind(this)
+    this.handleOnChangeEmail = this.handleOnChangeEmail.bind(this)
+    this.handleOnChangePassword = this.handleOnChangePassword.bind(this)
     // this.signIn = this.signIn.bind(this)
-    // this.state = {
-    //   email:"", 
-    //   password:""
-    // }
+    this.state = {
+      email:"", 
+      password:""
+    }
   }
 
-  // handleOnChangeEmail(event) {
-  //   this.setState({email: event.target.value})
-  // }
+  handleOnChangeEmail(event) {
+    this.setState({email: event.target.value})
+  }
 
-  // handleOnChangePassword(event) {
-  //   this.setState({password: event.target.value})
-  // }
+  handleOnChangePassword(event) {
+    this.setState({password: event.target.value})
+  }
 
-  // signIn(event){
-  //   event.preventDefault();
-  //   const request = new XMLHttpRequest();
-  //   request.open("POST", this.props.url);
-  //   request.setRequestHeader("content-type", "application/json");
-  //   request.withCredentials = true;
-  //   request.onload = () => {
-  //     if (request.status === 201){
-  //       const user = JSON.parse(request.responseText);
-  //       this.props.onSignIn(user)
-  //     }
-  //   }
-  //   //the following data is sent first before the request is returned above which checks that the user is a valid user. Order is a bit switched.
-  //   const data = {
-  //     user: {
-  //       email: this.state.email,
-  //       password: this.state.password
-  //     }
-  //   }
-  //     request.send(JSON.stringify(data))
-  // }
+  signIn(event){
+    event.preventDefault();
+    // const request = new XMLHttpRequest();
+    // request.open("POST", this.props.url);
+    // request.setRequestHeader("content-type", "application/json");
+    // request.withCredentials = true;
+    // request.onload = () => {
+    //   if (request.status === 201){
+    //     const user = JSON.parse(request.responseText);
+    //     this.props.onSignIn(user)
+    //   }
+
+      fetch(this.props.url, {  
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: this.state.email,
+          password: this.state.password,
+        })
+      }).then(function(response) {
+      console.log(response.json());
+      return response.json()
+    })
+
+
+    
+    //the following data is sent first before the request is returned above which checks that the user is a valid user. Order is a bit switched.
+    // const data = {
+    //   user: {
+    //     email: this.state.email,
+    //     password: this.state.password
+    //   }
+    // }
+    //   request.send(JSON.stringify(data))
+  }
   
-      // <form  style='login-form' >
-      //   <input type="text" onChange={this.handleOnChangeEmail}  placeholder="email" />
-      //   <input type="password" onChange={this.handleOnChangePassword}  placeholder="password" />
-      //   <TouchableOpacity onClick={this.signIn} > SIGN IN </TouchableOpacity>
-      // </form>
   render() {
     return (
       <View style={styles.container}>
@@ -81,6 +93,7 @@ class SignIn extends React.Component {
             ref='email' 
             label='email' 
             placeholder='email'
+            onChange={this.handleOnChangeEmail}
             />
           
           <InputField 
@@ -88,10 +101,11 @@ class SignIn extends React.Component {
             ref='password'
             label='password' 
             placeholder='password'
+            onChange={this.handleOnChangePassword}
             />
 
         </Form>
-        
+
           <TouchableOpacity onClick={this.signIn} style={styles.button} > 
             <Text>SIGN IN</Text>
           </TouchableOpacity>
