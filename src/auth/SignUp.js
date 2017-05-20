@@ -100,15 +100,14 @@ class SignUp extends React.Component {
             placeholder="password confirmation" 
           />
         </Form>
-          <TouchableOpacity 
-            onPress={this.signUp}
-            style={styles.button}>
-              <Text>SIGN UP</Text>
-          </TouchableOpacity>
+        
+        <TouchableOpacity 
+          onPress={this.signUp}
+          style={styles.button}>
+            <Text>SIGN UP</Text>
+        </TouchableOpacity>
 
-        <View onPress = {this.goBack}>
-          <Text> ← sign in </Text>
-        </View>
+
       </View>
     )
   }

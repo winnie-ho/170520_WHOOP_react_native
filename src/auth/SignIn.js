@@ -89,6 +89,8 @@ class SignIn extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <Text>SIGN IN</Text>
+
         <Form
           style={styles.form}
           ref='login-form'
@@ -110,13 +112,13 @@ class SignIn extends React.Component {
 
         </Form>
 
-          <TouchableOpacity onPress={this.signIn} style={styles.button} > 
+        <TouchableOpacity 
+          onPress={this.signIn} 
+          style={styles.button} > 
             <Text>SIGN IN</Text>
-          </TouchableOpacity>
+        </TouchableOpacity>
 
-          <TouchableOpacity onPress = {this.createAccount}>
-            <Text>create account</Text>
-          </TouchableOpacity>
+
       </View>
     )
   }
