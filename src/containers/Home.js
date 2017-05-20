@@ -12,6 +12,8 @@ import {
 } from 'react-native-router-flux';
 
 import SignIn from '../auth/SignIn';
+import SignUp from '../auth/SignUp';
+// import SignOut from '../auth/SignOut';
 
 
 class Home extends React.Component {
@@ -46,8 +48,15 @@ class Home extends React.Component {
 						<Text>my groups</Text>
 					</TouchableOpacity>
 
-					<SignIn url="https://whooprails.herokuapp.com/users/sign_in.json" onSignIn={this.setUser}>
+					<SignIn 
+						url="https://whooprails.herokuapp.com/users/sign_in.json" 
+						onSignIn={this.setUser}>
 					</SignIn>
+
+		      <SignUp 
+		      	url="https://whooprails.herokuapp.com/users.json">
+
+		      </SignUp>
 				</View>
 			)
 	}

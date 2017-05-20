@@ -4,9 +4,9 @@ import {
   AppRegistry,
   View,
   Text,
-  TouchableOpacity,
   StyleSheet,
-  AlertIOS
+  TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 
 import { 
@@ -21,18 +21,48 @@ import {
   KeyboardAwareScrollView
 } from 'react-native-form-generator';
 
-class SignIn extends React.Component {
+class SignUp extends React.Component {
 
-  constructor(props){
+  constructor(props) {
     super(props)
+    this.signUp = this.signUp.bind(this)
+    this.handleOnChangeName = this.handleOnChangeName.bind(this)
     this.handleOnChangeEmail = this.handleOnChangeEmail.bind(this)
     this.handleOnChangePassword = this.handleOnChangePassword.bind(this)
-    this.signIn = this.signIn.bind(this)
-
+    this.handleOnChangePassConf = this.handleOnChangePassConf.bind(this)
     this.state = {
+      name:"",
       email:"", 
-      password:""
+      password:"", 
+      passwordConfirmation:""
     }
+  }
+
+  signUp(){
+    fetch('https://whooprails.herokuapp.com/users.json', {  
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: this.state.name,
+          email: this.state.email,
+          password: this.state.password,
+          password_confirmation: this.state.passwordConfirmation
+        }) 
+      }).then((response) => {
+        console.log(response.json);
+        return response.json()
+      })
+      .then((responseData) => {
+          console.log(responseData);
+      })
+      .done();
+  }
+
+  handleOnChangeName(event) {
+    this.setState({name: event.target.value})
   }
 
   handleOnChangeEmail(event) {
@@ -43,76 +73,35 @@ class SignIn extends React.Component {
     this.setState({password: event.target.value})
   }
 
-  signIn(){
-    console.log('logging in');
-    // const request = new XMLHttpRequest();
-    // request.open("POST", this.props.url);
-    // request.setRequestHeader("content-type", "application/json");
-    // request.withCredentials = true;
-    // request.onload = () => {
-    //   if (request.status === 201){
-    //     const user = JSON.parse(request.responseText);
-    //     this.props.onSignIn(user)
-    //   }
-
-      fetch('https://whooprails.herokuapp.com/users/sign_in.json', {  
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: this.state.email,
-          password: this.state.password,
-        }) 
-      }).then((response) => {
-        console.log(response.json);
-        return response.json()
-      })
-      .then((responseData) => {
-          console.log(responseData);
-      })
-      .done();
-
-
-    
-    //the following data is sent first before the request is returned above which checks that the user is a valid user. Order is a bit switched.
-    // const data = {
-    //   user: {
-    //     email: this.state.email,
-    //     password: this.state.password
-    //   }
-    // }
-    //   request.send(JSON.stringify(data))
+  handleOnChangePassConf(event) {
+    this.setState({passwordConfirmation: event.target.value})
   }
   
   render() {
     return (
       <View style={styles.container}>
-        <Form
-          style={styles.form}
-          ref='login-form'
-          label="login">
-
+        <Form style={styles.form}>
           <InputField 
-            style={styles.input}
-            ref='email' 
-            placeholder='email'
-            onChange={this.handleOnChangeEmail}
-            />
-          
+            onChange={this.handleOnChangeName}  
+            placeholder="name" 
+          />
           <InputField 
-            style={styles.input}
-            ref='password'
-            placeholder='password'
-            onChange={this.handleOnChangePassword}
-            />
-
-        </Form>
-
-          <TouchableOpacity onPress={this.signIn} style={styles.button} > 
-            <Text>SIGN IN</Text>
+            onChange={this.handleOnChangeEmail}  
+            placeholder="email"
+          />
+          <InputField 
+            onChange={this.handleOnChangePassword}  
+            placeholder="password" 
+          />
+          <InputField 
+            onChange={this.handleOnChangePassConf}  
+            placeholder="password confirmation" 
+          />
+          <TouchableOpacity 
+            onPress={this.signUp}>
+              <Text>SIGN UP</Text>
           </TouchableOpacity>
+        </Form>
       </View>
     )
   }
@@ -130,6 +119,13 @@ const styles = StyleSheet.create({
   },
   input: {
     width: 300,
+  },
+  logo: {
+    fontSize: 20,
+    marginTop: 10,
+  },
+  h3: {
+    fontSize: 15,
   },
   button: {
     borderRadius: 5,
@@ -152,4 +148,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default SignIn
+export default SignUp
