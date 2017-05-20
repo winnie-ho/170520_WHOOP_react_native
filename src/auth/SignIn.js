@@ -113,6 +113,10 @@ class SignIn extends React.Component {
           <TouchableOpacity onPress={this.signIn} style={styles.button} > 
             <Text>SIGN IN</Text>
           </TouchableOpacity>
+
+          <TouchableOpacity onPress = {this.createAccount}>
+            <Text>create account</Text>
+          </TouchableOpacity>
       </View>
     )
   }
@@ -120,7 +124,7 @@ class SignIn extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 0,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
@@ -138,7 +142,7 @@ const styles = StyleSheet.create({
     padding: 5,
     width: 100,
     alignItems: 'center',
-    margin: 5,
+    margin: 30,
   },
     loginForm: {
     fontFamily: 'GeoSansLight',

@@ -80,6 +80,8 @@ class SignUp extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <Text>SIGN UP</Text>
+
         <Form style={styles.form}>
           <InputField 
             onChange={this.handleOnChangeName}  
@@ -97,12 +99,16 @@ class SignUp extends React.Component {
             onChange={this.handleOnChangePassConf}  
             placeholder="password confirmation" 
           />
+        </Form>
           <TouchableOpacity 
             onPress={this.signUp}
             style={styles.button}>
               <Text>SIGN UP</Text>
           </TouchableOpacity>
-        </Form>
+
+        <View onPress = {this.goBack}>
+          <Text> ← sign in </Text>
+        </View>
       </View>
     )
   }
@@ -110,7 +116,7 @@ class SignUp extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 0,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
@@ -135,7 +141,7 @@ const styles = StyleSheet.create({
     padding: 5,
     width: 100,
     alignItems: 'center',
-    margin: 5,
+    margin: 25,
   },
     loginForm: {
     fontFamily: 'GeoSansLight',
