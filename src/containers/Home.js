@@ -14,6 +14,7 @@ import {
 import SignIn from '../auth/SignIn';
 import SignUp from '../auth/SignUp';
 import SignOut from '../auth/SignOut';
+import dbHandler from '../DBHandler';
 
 
 class Home extends React.Component {
@@ -56,28 +57,15 @@ class Home extends React.Component {
 
   getData(){
   	console.log("get Data Fetch");
-
-		// fetch('https://whooprails.herokuapp.com/memberships/1.json')  
-		//   .then(function(response) {
-		//     console.log(response.json());
-		//     return response.json()
-
-	 //  })
-
-
-
     var urlSpec = "memberships/1";
     var word = "GET";
     var callback = function(data){
       this.setState({data: data})
-      console.log("Warming up", data);
+      console.log("Getting user data:", data);
     }.bind(this);
     var DBQuery = new dbHandler();
     var dataToSend = null;
-    var DBQuery = new dbHandler();
     DBQuery.callDB(urlSpec, word, callback, dataToSend);
-
-
   }
 
   setUser(user){
@@ -91,9 +79,9 @@ class Home extends React.Component {
     console.log("create account clicked", this.state.createAccount);
   }
 
-	// goGroupsPage(){
-	// 	Actions.groups();
-	// }
+	goGroupsPage(){
+		Actions.groups();
+	}
 
 	loginView(){
 		this.setState({createAccount:false});
@@ -139,16 +127,22 @@ class Home extends React.Component {
   	// 3 - Enter
   		if(this.state.currentUser){
 		    mainDiv = 
-			    <View className = "sign-in">
-			      <View className = "intro">
-			        <Text> Hi </Text>
-			        <Text> {this.state.currentUser.name} </Text>
-			      </View>
+			    <View style={styles.signIn}>
+		        <Text style={styles.greeting}> Hi </Text>
+		        <Text style={styles.greeting}> {this.state.currentUser.name} </Text>
+		        <TouchableOpacity 
+		        	style={styles.button} 
+		        	onPress = {this.goGroupsPage}>
+		        	<Text> my groups </Text>
+		        </TouchableOpacity>
 			    </View>
 
 		    signOutDiv = 
 			    <View>
-			      <SignOut url="https://whooprails.herokuapp.com/users/sign_out.json" onSignOut={this.setUser}></SignOut>
+			      <SignOut 
+			      	url="https://whooprails.herokuapp.com/users/sign_out.json"
+			      	onSignOut={this.setUser}>
+			      </SignOut>
 			    </View>
 			  createAccDiv = <View></View>
   		}
@@ -191,8 +185,15 @@ const styles = StyleSheet.create({
 		flexDirection: 'column',
 		justifyContent: 'center',
 		alignItems: 'center',
+		padding: 50,
 	},
 	signUp: {
+		flex: 0,
+		flexDirection: 'column',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	intro: {
 		flex: 0,
 		flexDirection: 'column',
 		justifyContent: 'center',
@@ -203,6 +204,9 @@ const styles = StyleSheet.create({
 		flexDirection: 'column',
 		justifyContent: 'center',
 		alignItems: 'center',
+	},
+	greeting: {
+		fontSize: 20,
 	},
 	logo: {
 		fontSize: 40,
