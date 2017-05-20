@@ -23,6 +23,7 @@ class Home extends React.Component {
 		this.setUser = this.setUser.bind(this);
     this.createAccount = this.createAccount.bind(this);
     this.getData = this.getData.bind(this);
+    this.loginView = this.loginView.bind(this);
 
     this.state = {
       currentUser: null,
@@ -36,33 +37,53 @@ class Home extends React.Component {
   }
 
   getUser(){
-    const request = new XMLHttpRequest();
-    request.open("GET", "https://whooprails.herokuapp.com/users/1.json");
-    request.setRequestHeader("content-type", "application/json");
-    request.withCredentials = true;
-    request.onload = () => {
-      if(request.status === 200){
-        console.log("request.responseText", request.responseText);
-        const receivedUser = JSON.parse(request.responseText);
-        this.setUser(receivedUser, this.getData());
-      } else if (request.status === 401){
-        this.setUser(null);
-      }
-    }
-    request.send(null);
+    // const request = new XMLHttpRequest();
+    // request.open("GET", "https://whooprails.herokuapp.com/users/1.json");
+    // request.setRequestHeader("content-type", "application/json");
+    // request.withCredentials = true;
+    // request.onload = () => {
+    //   if(request.status === 200){
+    //     console.log("request.responseText", request.responseText);
+    //     const receivedUser = JSON.parse(request.responseText);
+    //     this.setUser(receivedUser, this.getData());
+    //   } else if (request.status === 401){
+    //     this.setUser(null);
+    //   }
+    // }
+    // request.send(null);
+
+    console.log("get User Fetch");
+
+		// fetch('https://whooprails.herokuapp.com/users/1.json')  
+		//   .then(function(response) {
+		//     console.log(response.json());
+		//     return response.json()
+
+	 //  })
   }
 
   getData(){
-    var urlSpec = "memberships/1";
-    var word = "GET";
-    var callback = function(data){
-      this.setState({data: data})
-      console.log("Warming up", data);
-    }.bind(this);
-    var DBQuery = new dbHandler();
-    var dataToSend = null;
-    var DBQuery = new dbHandler();
-    DBQuery.callDB(urlSpec, word, callback, dataToSend);
+  	console.log("get Data Fetch");
+
+		// fetch('https://whooprails.herokuapp.com/memberships/1.json')  
+		//   .then(function(response) {
+		//     console.log(response.json());
+		//     return response.json()
+
+	 //  })
+
+
+
+    // var urlSpec = "memberships/1";
+    // var word = "GET";
+    // var callback = function(data){
+    //   this.setState({data: data})
+    //   console.log("Warming up", data);
+    // }.bind(this);
+    // var DBQuery = new dbHandler();
+    // var dataToSend = null;
+    // var DBQuery = new dbHandler();
+    // DBQuery.callDB(urlSpec, word, callback, dataToSend);
   }
 
   setUser(user){
@@ -75,57 +96,122 @@ class Home extends React.Component {
     console.log("create account clicked", this.state.createAccount);
   }
 
-	goGroupsPage(){
-		Actions.groups();
+	// goGroupsPage(){
+	// 	Actions.groups();
+	// }
+
+	loginView(){
+		this.setState({createAccount:false});
 	}
 
 	render(){
+
+		// 1 - Main Sign In
+			let mainDiv = 
+			<View style = {styles.signIn}>
+				<SignIn 
+					url="https://whooprails.herokuapp.com/users/sign_in.json"
+					create={this.state.createAccount} 
+					onSignIn={this.setUser}>
+				</SignIn>
+
+        <Text onPress={this.createAccount}> create account </Text>
+			</View>
+
+			let createAccDiv = <View></View>
+			let signOutDiv = <View></View>
+
+
+		// 2 - Sign Up
+			if(this.state.createAccount === true){
+		    createAccDiv = 
+		    	<View style = {styles.signUp}> 
+
+			      <SignUp 
+			      	url="https://whooprails.herokuapp.com/users.json" 
+			      	create={this.state.createAccount} 
+			      	onSignUp={this.setUser}>
+			      </SignUp>
+
+	          <Text onPress={this.loginView}> ← sign in </Text>
+
+			    </View>
+
+		    mainDiv = <View></View>
+		    signOutDiv = <View></View>
+  		}
+
+  	// 3 - Enter
+  		if(this.state.currentUser){
+		    mainDiv = 
+			    <View className = "sign-in">
+			      <View className = "intro">
+			        <Text> Hi </Text>
+			        <Text> {this.state.currentUser.name} </Text>
+			      </View>
+			    </View>
+
+		    signOutDiv = 
+			    <View>
+			      <SignOut url="https://whooprails.herokuapp.com/users/sign_out.json" onSignOut={this.setUser}></SignOut>
+			    </View>
+			  createAccDiv = <View></View>
+  		}
+
+
 		return(
-				<View style = {styles.container}>
-					<Text style = {styles.logo}>
+			<View style = {styles.main}>
+				<Text style = {styles.logo}>
 					WH◉◎P
 					{"\n"}
-					</Text>
+				</Text>
 
-					<TouchableOpacity
-						style = {styles.button}
-						onPress = {this.goGroupsPage}>
-						<Text>my groups</Text>
-					</TouchableOpacity>
+				<View style = {styles.container}>
+					<View>
+	          { mainDiv }
+	        </View>
 
-					<Text>LOGIN</Text>
-					<SignIn 
-						url="https://whooprails.herokuapp.com/users/sign_in.json"
-						create = {this.state.createAccount} 
-						onSignIn={this.setUser}>
-					</SignIn>
+	        <View>
+	          { createAccDiv }
+	        </View>
 
-					<View onPress = {this.createAccount}>
-      			<Text>create account</Text>
-    			</View>
-
-					<Text>SIGN UP</Text>
-		      <SignUp 
-		      	url="https://whooprails.herokuapp.com/users.json">
-		      </SignUp>
+	        <View>
+		        { signOutDiv }
+		      </View>
 				</View>
-			)
+			</View>
+		)
 	}
 }
 
 const styles = StyleSheet.create({
+	main: {
+		flex: 0,
+		flexDirection: 'column',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	signIn: {
+		flex: 0,
+		flexDirection: 'column',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	signUp: {
+		flex: 0,
+		flexDirection: 'column',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
 	container: {
-		flex: 1,
+		flex: 0,
 		flexDirection: 'column',
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
 	logo: {
-		fontSize: 20,
-		marginTop: 10,
-	},
-	h3: {
-		fontSize: 15,
+		fontSize: 40,
+		margin: 50,
 	},
 	button: {
 		borderRadius: 5,
