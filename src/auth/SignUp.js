@@ -98,7 +98,8 @@ class SignUp extends React.Component {
             placeholder="password confirmation" 
           />
           <TouchableOpacity 
-            onPress={this.signUp}>
+            onPress={this.signUp}
+            style={styles.button}>
               <Text>SIGN UP</Text>
           </TouchableOpacity>
         </Form>
