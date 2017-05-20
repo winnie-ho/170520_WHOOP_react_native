@@ -84,23 +84,23 @@ class SignUp extends React.Component {
 
         <Form style={styles.form}>
           <InputField 
-            onChange={this.handleOnChangeName}  
+            onChangeText={this.handleOnChangeName}  
             placeholder="name" 
           />
           <InputField 
-            onChange={this.handleOnChangeEmail}  
+            onChangeText={this.handleOnChangeEmail}  
             placeholder="email"
           />
           <InputField 
-            onChange={this.handleOnChangePassword}  
+            onChangeText={this.handleOnChangePassword}  
             placeholder="password" 
           />
           <InputField 
-            onChange={this.handleOnChangePassConf}  
+            onChangeText={this.handleOnChangePassConf}  
             placeholder="password confirmation" 
           />
         </Form>
-        
+
         <TouchableOpacity 
           onPress={this.signUp}
           style={styles.button}>

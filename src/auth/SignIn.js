@@ -36,54 +36,37 @@ class SignIn extends React.Component {
   }
 
   handleOnChangeEmail(event) {
-    this.setState({email: event.target.value})
+    this.setState({email: event})
   }
 
   handleOnChangePassword(event) {
-    this.setState({password: event.target.value})
+    this.setState({password: event})
   }
 
-  signIn(){
+  signIn(event){
     console.log('logging in');
-    // const request = new XMLHttpRequest();
-    // request.open("POST", this.props.url);
-    // request.setRequestHeader("content-type", "application/json");
-    // request.withCredentials = true;
-    // request.onload = () => {
-    //   if (request.status === 201){
-    //     const user = JSON.parse(request.responseText);
-    //     this.props.onSignIn(user)
-    //   }
+    console.log('email:', this.state.email);
+    console.log('password:', this.state.password);
 
-      fetch('https://whooprails.herokuapp.com/users/sign_in.json', {  
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: this.state.email,
-          password: this.state.password,
-        }) 
-      }).then((response) => {
-        console.log(response.json);
-        return response.json()
-      })
-      .then((responseData) => {
-          console.log(responseData);
-      })
-      .done();
-
-
-    
+    event.preventDefault();
+    const request = new XMLHttpRequest();
+    request.open("POST", this.props.url);
+    request.setRequestHeader("content-type", "application/json");
+    request.withCredentials = true;
+    request.onload = () => {
+      if (request.status === 201){
+        const user = JSON.parse(request.responseText);
+        this.props.onSignIn(user)
+      }
+    }
     //the following data is sent first before the request is returned above which checks that the user is a valid user. Order is a bit switched.
-    // const data = {
-    //   user: {
-    //     email: this.state.email,
-    //     password: this.state.password
-    //   }
-    // }
-    //   request.send(JSON.stringify(data))
+    const data = {
+      user: {
+        email: this.state.email,
+        password: this.state.password
+      }
+    }
+      request.send(JSON.stringify(data))
   }
   
   render() {
@@ -100,14 +83,14 @@ class SignIn extends React.Component {
             style={styles.input}
             ref='email' 
             placeholder='email'
-            onChange={this.handleOnChangeEmail}
+            onChangeText={this.handleOnChangeEmail}
             />
           
           <InputField 
             style={styles.input}
             ref='password'
             placeholder='password'
-            onChange={this.handleOnChangePassword}
+            onChangeText={this.handleOnChangePassword}
             />
 
         </Form>

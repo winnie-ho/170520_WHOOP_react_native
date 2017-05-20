@@ -37,29 +37,21 @@ class Home extends React.Component {
   }
 
   getUser(){
-    // const request = new XMLHttpRequest();
-    // request.open("GET", "https://whooprails.herokuapp.com/users/1.json");
-    // request.setRequestHeader("content-type", "application/json");
-    // request.withCredentials = true;
-    // request.onload = () => {
-    //   if(request.status === 200){
-    //     console.log("request.responseText", request.responseText);
-    //     const receivedUser = JSON.parse(request.responseText);
-    //     this.setUser(receivedUser, this.getData());
-    //   } else if (request.status === 401){
-    //     this.setUser(null);
-    //   }
-    // }
-    // request.send(null);
-
-    console.log("get User Fetch");
-
-		// fetch('https://whooprails.herokuapp.com/users/1.json')  
-		//   .then(function(response) {
-		//     console.log(response.json());
-		//     return response.json()
-
-	 //  })
+    const request = new XMLHttpRequest();
+    request.open("GET", "https://whooprails.herokuapp.com/users/1.json");
+    request.setRequestHeader("content-type", "application/json");
+    request.withCredentials = true;
+    request.onload = () => {
+      if(request.status === 200){
+        console.log("request.responseText", request.responseText);
+        const receivedUser = JSON.parse(request.responseText);
+        this.setUser(receivedUser, this.getData());
+      } else if (request.status === 401){
+        console.log("request.responseText", request.responseText);
+        this.setUser(null);
+      }
+    }
+    request.send(null);
   }
 
   getData(){
@@ -74,20 +66,23 @@ class Home extends React.Component {
 
 
 
-    // var urlSpec = "memberships/1";
-    // var word = "GET";
-    // var callback = function(data){
-    //   this.setState({data: data})
-    //   console.log("Warming up", data);
-    // }.bind(this);
-    // var DBQuery = new dbHandler();
-    // var dataToSend = null;
-    // var DBQuery = new dbHandler();
-    // DBQuery.callDB(urlSpec, word, callback, dataToSend);
+    var urlSpec = "memberships/1";
+    var word = "GET";
+    var callback = function(data){
+      this.setState({data: data})
+      console.log("Warming up", data);
+    }.bind(this);
+    var DBQuery = new dbHandler();
+    var dataToSend = null;
+    var DBQuery = new dbHandler();
+    DBQuery.callDB(urlSpec, word, callback, dataToSend);
+
+
   }
 
   setUser(user){
     this.setState({currentUser:user});
+    console.log("current user", user);
   }
 
   createAccount() {
