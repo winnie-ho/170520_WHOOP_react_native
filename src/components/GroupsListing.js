@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
 	},
 	newGroup: {
     height: 50,
-    width: 330,
+    width: 350,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,

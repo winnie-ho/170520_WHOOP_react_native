@@ -19,8 +19,8 @@ class Group extends React.Component{
     super(props)
   }
 
-  goGroup(){
-    Actions.groupView();
+  goGroup(groupId){
+    Actions.groupView({groupId: groupId});
   }
 
   render(){
@@ -42,7 +42,7 @@ class Group extends React.Component{
 
     return(
       <TouchableOpacity 
-        onPress={this.goGroup}
+        onPress={this.goGroup(this.props.groupId)}
         style={styles.groupCard}>
         <Text>{this.props.group.name}</Text>
       </TouchableOpacity>
@@ -54,7 +54,7 @@ class Group extends React.Component{
 const styles = StyleSheet.create({
   groupCard: {
     height: 50,
-    width: 330,
+    width: 350,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
