@@ -12,6 +12,18 @@ import {
   Actions,
 } from 'react-native-router-flux';
 
+import { 
+  Form,
+  Separator,
+  InputField,
+  LinkField,
+  SwitchField,
+  PickerField,
+  DatePickerField,
+  TimePickerField,
+  KeyboardAwareScrollView
+} from 'react-native-form-generator';
+
 import dbHandler from '../DBHandler';
 
 class GroupNew extends React.Component {
@@ -32,14 +44,32 @@ class GroupNew extends React.Component {
 
   render(){
     return(
-      <div className = "new-group-form-div">
-        <form onSubmit={this.props.addGroup} className="new-group-form">
-          <input type="text" onChange={this.handleOnChangeName} placeholder="name" />
-          <button onClick={this.props.addGroup}> ADD </button>
-        </form>
-      </div>
+      <View>
+        <Form 
+          onSubmit={this.props.addGroup}>
+          <TextInput type="text" onChangeText={this.handleOnChangeName} placeholder="name" />
+          <TouchableOpacity
+            style={styles.button} 
+            onPress={this.props.addGroup}>ADD 
+          </TouchableOpacity>
+        </Form>
+      </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  button: {
+    height: 100,
+    width: 340,
+    borderRadius: 5,
+    borderColor: 'gray',
+    borderWidth: 1,
+    padding: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 5,
+  },
+})
 
 export default GroupNew

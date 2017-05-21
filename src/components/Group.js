@@ -19,6 +19,10 @@ class Group extends React.Component{
     super(props)
   }
 
+  goGroup(){
+    Actions.groupView();
+  }
+
   render(){
       if(this.props.eventUpdates == -1){
         var eventAlert = <View></View>
@@ -37,19 +41,26 @@ class Group extends React.Component{
     //   </View>
 
     return(
-      <View style={styles.container}>
-      </View>
+      <TouchableOpacity 
+        onPress={this.goGroup}
+        style={styles.groupCard}>
+        <Text>{this.props.group.name}</Text>
+      </TouchableOpacity>
 
     )
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
+  groupCard: {
+    height: 50,
+    width: 330,
     justifyContent: 'center',
     alignItems: 'center',
+    borderRadius: 5,
+    borderColor: 'gray',
+    borderWidth: 1,
+    margin: 5,
   },
   logo: {
     fontSize: 20,
