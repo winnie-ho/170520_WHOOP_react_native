@@ -137,6 +137,8 @@ const styles = StyleSheet.create({
 		borderColor: 'gray',
 		borderWidth: 1,
 		borderRadius: 5,
+		margin: 5,
+		marginBottom: 10,
 	},
 	groupList: {
 		flex: 0,

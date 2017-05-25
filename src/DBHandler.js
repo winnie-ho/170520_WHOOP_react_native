@@ -21,7 +21,7 @@ DBHandler.prototype = {
         callback(data);
       } else {
         console.log("Uh oh you're not logged in!");
-        browserHistory.goBack();
+        // browserHistory.goBack();
       }
     }
   request.send(dataToSend);

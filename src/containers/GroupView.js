@@ -32,7 +32,8 @@ import {
 class GroupView extends React.Component {
 	constructor(props){
 		super(props);
-    console.log('Group ID Selected:', this.props.groupId)
+		console.log('props in groupview', this.props);
+    console.log('Group ID Selected:', this.props.selectedGroup)
     // this.groupSelected = this.props.location.state.groupId;
     this.getData = this.getData.bind(this);
     this.addMessage = this.addMessage.bind(this);
@@ -73,10 +74,10 @@ class GroupView extends React.Component {
 	}
 
 	componentWillMount(){
-	    this.getData();
 	  }
 
 	componentDidMount(){
+	    this.getData();
 	  }
 
 	getData(){
@@ -222,26 +223,24 @@ class GroupView extends React.Component {
 	}
 
 	render(){
-		console.log("groupId coming through", this.props.groupId);
-		console.log("groupId coming through", this.props.data);
-		var eventNodes = this.state.events.map((event, index)=>{
-			return(
-					<TouchableOpacity
-						onPress={this.goEvent}
-						key={index}>
-						<Text>{event.toUpperCase()}</Text>
-					</TouchableOpacity>
-				)
-		})
+		// var eventNodes = this.state.events.map((event, index)=>{
+		// 	return(
+		// 		<TouchableOpacity
+		// 			onPress={this.goEvent}
+		// 			key={index}>
+		// 			<Text>{event.toUpperCase()}</Text>
+		// 		</TouchableOpacity>
+		// 	)
+		// })
 
-		var messageNodes = this.state.messages.map((message, index)=>{
-			return(
-					<TouchableOpacity
-						key={index}>
-						<Text>{message.toUpperCase()}</Text>
-					</TouchableOpacity>
-				)
-		})
+		// var messageNodes = this.state.messages.map((message, index)=>{
+		// 	return(
+		// 			<TouchableOpacity
+		// 				key={index}>
+		// 				<Text>{message.toUpperCase()}</Text>
+		// 			</TouchableOpacity>
+		// 		)
+		// })
 
 		// var memberNodes = this.state.members.map((member, index)=>{
 		// 	return(
@@ -257,23 +256,38 @@ class GroupView extends React.Component {
     var upperGroupTitle = `${this.state.groupData.name}`.toUpperCase()
     if (this.state.editGroup===true){
       var header = <View className = "edit-group">
-      <input onChange = {this.handleOnChangeGroupName}placeholder = "group name"></input>
+      <TextInput 
+      	onChangeText = {this.handleOnChangeGroupName}
+      	placeholder = "group name">
+      </TextInput>
       <TouchableOpacity onPress = {this.editGroup} >update</TouchableOpacity>
       </View>
       } else if (this.state.editGroup === false) {
-        header = <View> {upperGroupTitle}</View>
+        header = <View> {upperGroupTitle} </View>
       }
   //group delete confirm conditional 
     if(this.state.deleteGroup === true){
     var deleteBox = 
     <View>
-      <DeleteConfirm deleteFunction = {this.deleteGroup} resetFunction = {this.resetDeleteGroup} dialogue = "Delete Group?"/>
+      <DeleteConfirm 
+      	deleteFunction = {this.deleteGroup} 
+      	resetFunction = {this.resetDeleteGroup} 
+      	dialogue = "Delete Group?"/>
     </View>
     } else if (this.state.deleteGroup === false) {
       deleteBox = 
       <View>
-        <TouchableOpacity onPress = {this.deleteGroupSwitch} className = "icon-TouchableOpacity"><Text>✄</Text></TouchableOpacity>
-        <TouchableOpacity onPress = {this.handleEditGroup} className = "icon-TouchableOpacity"><Text>✎</Text></TouchableOpacity>
+        <TouchableOpacity 
+        	onPress = {this.deleteGroupSwitch} 
+        	className = "icon-TouchableOpacity">
+        	<Text>✄</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity 
+        	onPress = {this.handleEditGroup} 
+        	className = "icon-TouchableOpacity">
+        	<Text>✎</Text>
+        </TouchableOpacity>
       </View>
     }
   //msg updates conditional 
@@ -283,7 +297,7 @@ class GroupView extends React.Component {
       <Text>{this.state.msgUpdates}</Text>
     </View>
   } else {
-    msgAlert = <View></View>
+    msgAlert = <View> </View>
   }
 
   // if(this.props.location.state.eventUpdates > -1){
@@ -306,63 +320,39 @@ class GroupView extends React.Component {
 				</ScrollView>
 				<Text style = {styles.h3}>MESSAGES</Text>
 				<ScrollView style = {styles.messageListing}>
-					{messageNodes}
 				</ScrollView>
 
 				<Text style = {styles.h3}>EVENTS</Text>
 				<ScrollView style = {styles.eventListing}>
-					{eventNodes}
 				</ScrollView>
 
 
 
 
 	      <View className="group-view">
-        <Text>{header}</Text>
-        <View className = "top-bar">
-          <View>
-            <Text onPress = {this.goGroupsPage}>← my groups</Text>
-          </View>
-            <View className = "top-bar-right">
-              {deleteBox}
-            </View>
-        </View>
 
-        <View className = "members-View">
+	        <View className = "group-main">        
+		        <View className = "message-board">
+		          <Form 
+			          className = "new-message-form">
+			          <TextInput 
+			          ref="form" 
+			          onChange = {this.handleOnChangeMsg} 
+			          placeholder = "✏︎ message" 
+			          className = "message-box"/> 
+			          <TouchableOpacity 
+			          	onPress = {this.addMessage}>
+			          		<Text>POST</Text>
+			          </TouchableOpacity>
+		          </Form>
+		        </View>
 
-        </View>
-        <View className = "group-main">
-
-        
-        <View className = "message-board">
-            {msgAlert}
-          
-
-
-          <Form 
-          onSubmit = {this.addMessage} 
-          className = "new-message-form">
-          <TextInput 
-          ref="form" 
-          onChange = {this.handleOnChangeMsg} 
-          placeholder = "✏︎ message" 
-          className = "message-box"/> 
-          <TouchableOpacity onPress = {this.addMessage}><Text>POST</Text></TouchableOpacity>
-          </Form>
-        </View>
-
-        <View className = "arrow" onPress = {this.jumpRight}> <Text> ▷ </Text> </View>
-        <View className = "arrow" onPress = {this.jumpLeft}> <Text> ◀︎ </Text></View>
-
-        <View className = "events-board">
-          <Text> EVENTS </Text> 
+	        <View className = "events-board">
+	          <Text> EVENTS </Text>
+	        </View>
           
         </View>
-        </View>
-          ⦿⦿
-      </View>
-
-
+	      </View>
 			</View>
 		)
 	}

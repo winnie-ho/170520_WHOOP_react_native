@@ -17,10 +17,21 @@ import dbHandler from '../DBHandler';
 class Group extends React.Component{
   constructor(props){
     super(props)
+    console.log("props", this.props);
+    this.state = {
+      groupId: null
+    }
   }
 
-  goGroup(groupId){
-    Actions.groupView({groupId: groupId});
+  componentDidMount(){
+    this.setState({groupId: this.props.group_id});
+  }
+
+  goGroup(){
+    console.log('props',this.props);
+    console.log('groupId',this.state.groupId);
+    let selectedGroup = this.state.groupId;
+    Actions.groupView({selectedGroup: selectedGroup});
   }
 
   render(){
@@ -42,7 +53,7 @@ class Group extends React.Component{
 
     return(
       <TouchableOpacity 
-        onPress={this.goGroup(this.props.groupId)}
+        onPress={this.goGroup}
         style={styles.groupCard}>
         <Text>{this.props.group.name}</Text>
       </TouchableOpacity>

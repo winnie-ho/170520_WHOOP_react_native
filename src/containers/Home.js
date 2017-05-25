@@ -133,7 +133,7 @@ class Home extends React.Component {
 		        <TouchableOpacity 
 		        	style={styles.button} 
 		        	onPress = {this.goGroupsPage}>
-		        	<Text> my groups </Text>
+		        	<Text> MY GROUPS </Text>
 		        </TouchableOpacity>
 			    </View>
 
@@ -213,10 +213,13 @@ const styles = StyleSheet.create({
 		margin: 50,
 	},
 	button: {
-		borderRadius: 5,
-		borderColor: 'gray',
-		borderWidth: 1,
-		padding: 5,
+    borderRadius: 5,
+    borderColor: 'gray',
+    borderWidth: 1,
+    padding: 5,
+    width: 100,
+    alignItems: 'center',
+    margin: 30,
 	}
 
 })
