@@ -139,9 +139,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     padding: 10,
   },
-  input: {
-    width: 300,
-  },
 })
 
 export default SignIn

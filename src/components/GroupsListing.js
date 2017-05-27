@@ -63,8 +63,6 @@ class GroupsListing extends React.Component{
 
     console.log("eventUpdates in GL", this.props.eventUpdates);
 
-  	console.log('groups', this.props.groups);
-  	console.log('searchQuery', this.state.searchQuery);
     return(
       <View style={styles.container}>
         <View style={styles.header}>
@@ -79,6 +77,12 @@ class GroupsListing extends React.Component{
 	        />
 
         <ScrollView style={styles.groupList}> 
+          	<TouchableOpacity 
+          	style={styles.newGroup}
+          	onPress = {this.props.handleNewGroup}>
+            {newGroupForm}
+            </TouchableOpacity>
+            
 	        {/*does the search filtering for the search bar*/}
 
 	        {
@@ -97,16 +101,8 @@ class GroupsListing extends React.Component{
 	              router = {this.props.router}/>
 	            ))
 	        }
-	          <View style={styles.newGroup}
-	          	onPress = {this.props.handleNewGroup}>
-	            {newGroupForm}
-	          </View>
-
-	          <View className = "new-group-fake">
-	          </View>
-
-	          <View className = "new-group-fake">
-	          </View>
+	          
+	          
         </ScrollView>
       </View>
     )

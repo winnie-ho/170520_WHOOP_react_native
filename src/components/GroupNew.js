@@ -6,6 +6,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   ScrollView,
+  TextInput,
 } from 'react-native';
 
 import {
@@ -44,31 +45,48 @@ class GroupNew extends React.Component {
 
   render(){
     return(
-      <View>
-        <Form 
-          onSubmit={this.props.addGroup}>
-          <TextInput type="text" onChangeText={this.handleOnChangeName} placeholder="name" />
-          <TouchableOpacity
-            style={styles.button} 
-            onPress={this.props.addGroup}>ADD 
-          </TouchableOpacity>
-        </Form>
+      <View
+        style={styles.newGroup}>
+        <TextInput 
+            style={styles.input}
+            type="text" 
+            onChangeText={this.handleOnChangeName} 
+            placeholder="group name" />
+        <TouchableOpacity
+          style={styles.button} 
+          onPress={this.props.addGroup}>
+          <Text>ADD</Text> 
+        </TouchableOpacity>
       </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  button: {
-    height: 100,
-    width: 340,
+  newGroup: {
+    height: 30,
+    width: 330,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  input: {
+    height: 30,
+    width: 260,
     borderRadius: 5,
     borderColor: 'gray',
     borderWidth: 1,
+    paddingLeft: 5,
+
+  },
+  button: {
     padding: 5,
+    width: 50,
+    marginLeft: 5,
     alignItems: 'center',
-    justifyContent: 'center',
-    margin: 5,
+    borderRadius: 5,
+    borderColor: 'gray',
+    borderWidth: 1,
   },
 })
 
