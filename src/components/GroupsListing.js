@@ -33,7 +33,7 @@ class GroupsListing extends React.Component{
   }
 
   doSearch(event){
-    this.setState({searchQuery: event.target.value});
+    this.setState({searchQuery: event});
   }
 
   handleNewGroup(){
@@ -63,19 +63,20 @@ class GroupsListing extends React.Component{
 
     console.log("eventUpdates in GL", this.props.eventUpdates);
 
+  	console.log('groups', this.props.groups);
+  	console.log('searchQuery', this.state.searchQuery);
     return(
-
       <View style={styles.container}>
         <View style={styles.header}>
           <Text onPress={this.goHomePage}> ←home </Text>
         </View>
 
-        <View style={styles.searchBar}>
 	        <TextInput 
+            style={styles.searchBar}
 	          placeholder = "🔎 search" 
 	          value = {this.state.searchQuery} 
-	          onChangeText = {this.doSearch} />
-	      </View>
+	          onChangeText = {this.doSearch} 
+	        />
 
         <ScrollView style={styles.groupList}> 
 	        {/*does the search filtering for the search bar*/}

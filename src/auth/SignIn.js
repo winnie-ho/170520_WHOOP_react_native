@@ -83,11 +83,12 @@ class SignIn extends React.Component {
             style={styles.input}
             ref='email' 
             placeholder='email'
+            keyboardType='email-address'
             onChangeText={this.handleOnChangeEmail}
             />
           
           <InputField 
-            style={styles.input}
+            style={styles.inputPassword}
             ref='password'
             placeholder='password'
             onChangeText={this.handleOnChangePassword}
@@ -137,8 +138,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'column',
     padding: 10,
-  }
-
+  },
+  input: {
+    width: 300,
+  },
 })
 
 export default SignIn
